@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar navbar-light"style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">
+    <img src="../../../../../assets/images/calendar.png" width="35" height="35" class="d-inline-block align-top" alt="">
+    <strong>Mi Reserva</strong>
+  </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li *ngIf="isClient" class="nav-item active">
+          <a class="nav-link" routerLink="edit/client/{{idUser}}" routerLinkActive="active-link">Perfil</a>
+        </li>
+
+        <li *ngIf="isClient" class="nav-item active">
+          <a class="nav-link" routerLink="home/clients" routerLinkActive="active-link">Ver Comercios</a>
+        </li>
+
+        <li *ngIf="isClient" class="nav-item active">
+          <a class="nav-link" routerLink="list/reserve/client" routerLinkActive="active-link">Citas</a>
+        </li>
+        
+        <li *ngIf="isOwner" class="nav-item active">
+          <a class="nav-link" routerLink="edit/owner/{{idUser}}" routerLinkActive="active-link">Perfil</a>
+        </li>
+        
+        <li *ngIf="isOwner" class="nav-item active">
+          <a class="nav-link" routerLink="commerce" routerLinkActive="active-link">Mi Comercio</a>
+        </li>
+
+        <li *ngIf="isOwner" class="nav-item active">
+          <a class="nav-link" routerLink="list/owner/client" routerLinkActive="active-link">Clientes</a>
+        </li>
+        
+        <li *ngIf="isAdmin" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Users
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="list/admin"  routerLinkActive="active-link" >Administators</a>
+            <a class="dropdown-item" routerLink="list/client" routerLinkActive="active-link" >Clients</a>
+            <a class="dropdown-item" routerLink="list/owner" routerLinkActive="active-link">Owners</a>
+          </div>
+        </li>
+
+        <li  *ngIf="isAdmin" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Commerce
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="list/commerce" routerLinkActive="active-link">Commerce</a>
+              <a class="dropdown-item" routerLink="list/type/commerce" routerLinkActive="active-link">Type of Commerce </a>
+            </div>
+          </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button (click)="logout()" class=" btn btn-info my-2 my-sm-0" type="submit">Salir  <i class="fas fa-sign-out-alt"></i></button>
+      </form>
+    </div>
+  </nav>

@@ -1,0 +1,62 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col text-center">
+          <h3>Tipo de Comercios</h3>
+        </div>
+        <div class="col text-right">
+          <button type="button" class="btn btn-success"  routerLink="/lobby/new/type/commerce/new">Agregar  <i class="fas fa-plus"></i></button>
+      </div>
+    </div>
+
+   <div class="col mt-3">
+    <table *ngIf="!load && commerce.length > 0" class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Type</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of commerce; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td class="text-capitalize">{{ item.type }}</td>
+
+            <td *ngIf="isAdmin">
+              <i (click)="delete(item)" class="pointer fas fa-trash-alt"></i>
+            </td>
+            <td *ngIf="!isAdmin">
+              <span class="badge badge-pill badge-danger"
+                >Only User Admin</span
+              >
+            </td>
+
+            <td>
+              <i
+                [routerLink]="['/lobby/new/type/commerce', item.id]"
+                class="pointer fas fa-edit"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="!load && commerce.length === 0">
+        <div class="alert alert-warning text-center mt-3">
+          <h4 class="alert-heading">No records</h4>
+          <p><i class="fas fa-exclamation fa-2x"></i></p>
+        </div>
+      </div>
+
+      <div *ngIf="load">
+        <div class="alert alert-info text-center mt-3">
+          <h4 class="alert-heading">load</h4>
+          <p><i class="fas fa-sync-alt fa-spin fa-2x"></i></p>
+          <p class="mb-0">Wait a moment</p>
+        </div>
+      </div>
+   </div>
+
+</div>

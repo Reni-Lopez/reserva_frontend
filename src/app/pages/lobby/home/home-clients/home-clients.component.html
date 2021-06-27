@@ -1,0 +1,94 @@
+<div class="container">
+
+    <div *ngIf="!hideCommerce  && findCommerce"  class="container text-center">
+        <h3>Tipo de Negocios</h3>
+    </div>
+    <div *ngIf="hideCommerce && !findCommerce" class="container text-center">
+        <h3>Listado de {{ nameCommerce }} </h3>
+    </div>
+    <hr>
+
+    <div *ngIf="hideCommerce" class="container text-right">
+        <button (click)="!findCommerce =  true && !hideCommerce = false" type="button" class="btn btn-primary" >Ver Comercios</button>
+    </div>
+
+    <br>
+    
+    <div  *ngIf="hideCommerce && !findCommerce"   class="card-columns">
+        <div *ngFor="let data of commerce;" class="card text-white bg-info mb-3" style="max-width: 18rem;">
+            <h4 class="card-header text-center">{{ data.name }}</h4>
+            <div class="card-body">
+                <button type="button" class="btn btn-outline-light btn-lg btn-block" (click)="reserve( data )" data-toggle="modal" data-target="#exampleModalCenter">Reserva ya tu Cita</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!hideCommerce  && findCommerce" class="card-columns">
+        <div *ngFor="let data of typeCommerce"  class="card text-white bg-info mb-3" style="max-width: 18rem;">
+            <h4 class="card-header text-center">{{ data.type }}</h4>
+            <div class="card-body">
+                <button type="button" class="btn btn-outline-light btn-lg btn-block" (click)="showCommerce( data )">Ver Comercios</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-center" id="exampleModalCenterTitle">{{ commerceName }}</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <h5 class="text-center">Datos de Comercio</h5>
+                <p>Dueño:  {{ownerName}}.</p>
+                <p>Dirección:  {{directionCommerce}}.</p>
+                <p>Teléfono:  {{phoneCommerce}}.</p>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha de la Reserva</label>
+                    <input (change)="getDate($event.target.value)"   class="form-control"  type="date" [(ngModel)]="dateReserve">
+                </div>
+
+                <div class="form-group">
+                    <label >Hora de la Reserva</label>
+                    <select (change)="getTime($event.target.value)" class="form-control form-control-sm">
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option disabled>Almuerzo</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Comentario o Descriptión (opcional).</label>
+                    <input (change)="getDescription($event.target.value)"  class="form-control"  type="text" [(ngModel)]="descriptionReserve">
+                </div>
+
+            </div>
+     
+            
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="generateReserve()">Reserva</button>
+        </div>
+      </div>
+    </div>
+  </div>

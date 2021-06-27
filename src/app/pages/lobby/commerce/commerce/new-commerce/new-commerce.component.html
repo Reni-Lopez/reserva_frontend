@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-12">
+
+    <div class="row">
+      <div class="col text-center">
+        <h3 *ngIf="button === 1" >   Creación de Comercio  </h3>
+        <h3 *ngIf="button === 2" >   Actualización de Comercio  </h3>
+      </div>
+  
+      <div class="col text-right">
+        <button
+          [routerLink]="['/lobby/list/commerce']"
+          class="btn waves-effect waves-light btn-rounded btn-primary"
+        >
+          <i class="fas fa-arrow-alt-circle-left"></i>
+          Regresar
+        </button>
+      </div>
+    </div>
+
+    <div class="container">
+      <form
+        #form="ngForm"
+        [formGroup]="commerce"
+        (ngSubmit)="onSubmit()"
+        autocomplete="off"
+      >
+        <input hidden formControlName="id" />
+
+        <div class="form-group">
+          <label> Tipo de Comercios</label>
+          <select class="custom-select" formControlName="type_commerce" (change)="selectCommerce()">
+            <option value="" disabled>Comercios</option>
+            <option *ngFor="let dato of typeOfCommerce" [ngValue]=" dato.id" >
+              {{ dato.type }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label> Comerciantes</label>
+          <select class="custom-select" formControlName="owner_id" (change)="selectOwner()">
+            <option value="" disabled>Comerciantes</option>
+            <option *ngFor="let dato of owner" [ngValue]=" dato.id" >
+              {{ dato.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label> Nombre </label>
+          <input
+            class="form-material form-control"
+            type="text"
+            formControlName="name"
+            [class.is-invalid]="invalidName"
+            required
+          />
+          <small *ngIf="invalidName" class="text-danger">
+            Campo Requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label> Horario de Apertura </label>
+          <input
+            class="form-material form-control"
+            type="time"
+            formControlName="opening"
+            [class.is-invalid]="invaliOpening"
+            [class.is-invalid]="!hour"
+            required
+          />
+          <small *ngIf="invaliOpening" class="text-danger">
+            Campo Requerido
+          </small>
+          <small *ngIf="!hour" class="text-danger">
+            Verificar hora de Apertura
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label> Horario de Cierre </label>
+          <input
+            class="form-material form-control"
+            type="time"
+            formControlName="closing"
+            [class.is-invalid]="invaliClosing"
+            [class.is-invalid]="!hour"
+            required
+          />
+          <small *ngIf="invaliClosing" class="text-danger">
+            Campo Requerido
+          </small>
+          <small *ngIf="!hour" class="text-danger">
+            Verificar hora de Cierre
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label> Dirección </label>
+          <input
+            class="form-material form-control"
+            type="text"
+            formControlName="direction"
+            [class.is-invalid]="invalidDirection"
+            required
+          />
+          <small *ngIf="invalidDirection" class="text-danger">
+            Campo Requerido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label> Telefono </label>
+          <input
+            class="form-material form-control"
+            type="tel"
+            pattern="[0-8]{8}"
+            formControlName="description"
+            required
+            [class.is-invalid]="invaliDescription"
+          />
+          <small *ngIf="invaliDescription" class="text-danger">
+            Campo Requerido
+          </small>
+          <small class="text-danger" *ngIf="this.commerce.get('description').errors?.minlength">
+            (Verifique que el numero de telefono)
+          </small>
+        </div>
+        
+
+        <div class="form-group">
+          <div *ngIf="button === 1" class="container col-7">
+            <button
+              type="submit"
+              [class.is-invalid]="!hour"
+              [disabled]="commerce.invalid"
+              class="btn btn-success btn-block fas"
+            >
+              Agregar <i class="fas fa-user-plus"></i>
+            </button>
+          </div>
+          <div *ngIf="button === 2" class="container col-7">
+            <button
+              type="submit"
+              [class.is-invalid]="!hour"
+              [disabled]="commerce.invalid"
+              class="btn btn-warning btn-block fas"
+            >
+              Actualizar <i class="fas fa-user-edit"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

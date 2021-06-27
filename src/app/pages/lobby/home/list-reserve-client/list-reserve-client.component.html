@@ -1,0 +1,26 @@
+
+
+<div class="card-columns" *ngIf="!load">
+    <div class="card" *ngFor="let item of reserves">
+      <div class="card-body">
+        <h5 class="card-title">Nombre del Comercio: {{item.comercio}} </h5>
+        <p class="card-text">Fecha: {{item.date}}, hora:{{item.time}} </p>
+        <p class="card-text">Description: {{item.description}} </p>
+      </div>
+    </div>
+</div>
+
+<div *ngIf="!load && reserves.length === 0">
+  <div class="alert alert-warning text-center mt-3">
+    <h4 class="alert-heading">No hay citas</h4>
+    <p><i class="fas fa-exclamation fa-2x"></i></p>
+  </div>
+</div>
+
+<div *ngIf="load">
+  <div class="alert alert-info text-center mt-3">
+    <h4 class="alert-heading">Cargando ..</h4>
+    <p><i class="fas fa-sync-alt fa-spin fa-2x"></i></p>
+    <p class="mb-0">Espere</p>
+  </div>
+</div>
